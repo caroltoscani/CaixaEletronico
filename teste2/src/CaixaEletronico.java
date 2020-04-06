@@ -9,9 +9,7 @@ public class CaixaEletronico {
     private static final int[] notasDisponiveis = {100,50,20,10};	
     private int valor;
     
-    public int getValor() {
-	return valor;
-    }
+    public int getValor() {	return valor; }
 
 	
     public void iniciarMenu() {
@@ -20,29 +18,28 @@ public class CaixaEletronico {
 	Scanner sc = new Scanner(System.in);  
 	int[][] vet;
      	
-	while(valorDigitado!=0){
-			
-        System.out.println("Digite o valor que deseja Sacar:");
-	    System.out.println("Digite 0 para sair:");   	
-				  	
-	    valorDigitado = sc.nextInt();
-	    String s = String.valueOf(valorDigitado);
-		    	
-		if (verificarValor(s)) {
-		    this.valor = valorDigitado;
-		   vet = calcularNotas(getValor());
-		   for(int i=0; i<vet.length; i++) {
-				mostrarNotas(vet[i][0], vet[i][1]);
+		while(valorDigitado!=0){
+				
+	        System.out.println("Digite o valor que deseja Sacar:");
+		    System.out.println("Digite 0 para sair:");   	
+					  	
+		    valorDigitado = sc.nextInt();
+		    String s = String.valueOf(valorDigitado);
+			    	
+			if (verificarValor(s)) {
+			    this.valor = valorDigitado;
+			   vet = calcularNotas(getValor());
+			   for(int i=0; i<vet.length; i++) {
+				   if(vet[i][0]!=0)
+					mostrarNotas(vet[i][0], vet[i][1]);
+			   }
 			   
-		   }
-		   
-		}else {
-                System.out.println("Digite um valor válido:");
-		    		
+			}else {
+	                System.out.println("Valor inválido!");
+			}
 		}
-	}
-            sc.close();
-            System.out.println("Saque finalizado");
+      sc.close();
+      System.out.println("Saque finalizado");
     	
     }
 	
@@ -50,23 +47,23 @@ public class CaixaEletronico {
 		
 	int val;
 	 
-            try {
+       try {
 			
 		if (valor == null || valor.length() == 0) {
 	            return false;
-	         }else {
+	    }else {
 			val =  Integer.parseInt(valor);
 			for(int i = 0; i< notasDisponiveis.length;i++) {
 	        	     val = val % notasDisponiveis[i];
-                        }
-	    		if (val !=0) 
-	        		 return false;
-	        	 else
-	        		 return true;
-	         }
-            }catch (NumberFormatException e) {
-                return false;
             }
+	    	if (val !=0) 
+	        		 return false;
+	        else
+	        		 return true;
+	     }
+       }catch (NumberFormatException e) {
+                return false;
+       }
     }
 	
     
